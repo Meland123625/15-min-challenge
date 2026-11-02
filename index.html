@@ -173,6 +173,21 @@ button:hover{
     margin-top:10px;
 }
 
+.confetti{
+    position:fixed;
+    width:10px;
+    height:10px;
+    top:-10px;
+    z-index:9999;
+    animation:fall 3s linear forwards;
+}
+
+@keyframes fall{
+    to{
+        transform:translateY(110vh) rotate(720deg);
+    }
+}
+    
 </style>
 </head>
 
@@ -586,6 +601,46 @@ function lagreKommentar(){
 
   alert("💬 Kommentar lagret!");
 }
+
+function konfetti(){
+
+  const farger = [
+    "#ff1493",
+    "#ff69b4",
+    "#ffd700",
+    "#00c853",
+    "#00b0ff"
+  ];
+
+  for(let i=0;i<150;i++){
+
+    const bit =
+      document.createElement("div");
+
+    bit.className = "confetti";
+
+    bit.style.left =
+      Math.random()*100 + "vw";
+
+    bit.style.background =
+      farger[
+        Math.floor(
+          Math.random()*farger.length
+        )
+      ];
+
+    bit.style.transform =
+      `rotate(${Math.random()*360}deg)`;
+
+    document.body.appendChild(bit);
+
+    setTimeout(()=>{
+      bit.remove();
+    },3000);
+
+  }
+
+}
     
 function fullfort(){
 
@@ -606,6 +661,8 @@ document.getElementById(
 
   localStorage.setItem("dag-"+dag,"true");
 
+konfetti();
+
   fetch(
       "https://script.google.com/macros/s/AKfycbzN_ktPiTSnktLe2nxQwwsWMwbmivlqjN-R0aDHjCnGH9sRlhXXjilOJGsduwa5zrWWkQ/exec",
       {
@@ -619,8 +676,9 @@ document.getElementById(
       }
     );
 
-    document.getElementById("melding").innerText =
-    "🎉 Bra jobba! Dagen er registrert.";
+document.getElementById("melding").innerText =
+"🎉 Woohoo! Dagens challenge er fullført!";
+
 
     oppdaterProgress();
 }
