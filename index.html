@@ -382,10 +382,14 @@ async function hentLeaderboard(){
   data.slice(1).forEach(rad => {
 
     const navn = rad[0];
-
-    if(score[navn] !== undefined){
-      score[navn]++;
-    }
+    const fullfort = rad[2];
+    
+    if(
+      score[navn] !== undefined &&
+      fullfort === "Ja"
+    ){
+  score[navn]++;
+}
 
   });
 
@@ -506,13 +510,15 @@ async function hentStreaks(){
   data.slice(1).forEach(rad => {
 
     const navn = rad[0];
+    const fullfort = rad[2];
 
     if(
       navn &&
+      fullfort === "Ja" &&
       teller[navn] !== undefined
     ){
-      teller[navn]++;
-    }
+  teller[navn]++;
+}
 
   });
 document.getElementById(
@@ -650,11 +656,11 @@ function lagreKommentar(){
     {
       method:"POST",
       body:JSON.stringify({
-        navn: bruker,
-        dato: new Date().toISOString().split("T")[0],
-        fullfort:"Ja",
-        kommentar: kommentar
-      })
+          navn: bruker,
+          dato: new Date().toISOString().split("T")[0],
+          fullfort:"Kommentar",
+          kommentar: kommentar
+        })
     }
   );
 
