@@ -166,7 +166,7 @@ button:hover{
 
 <div id="ovelser"></div>
 
-<button onclick="fullfort()">
+<button id="fullfortKnapp" onclick="fullfort()">
 ✅ Marker dagen som fullført
 </button>
 
@@ -502,9 +502,24 @@ function lagreKommentar(){
     
 function fullfort(){
 
-    localStorage.setItem("dag-"+dag,"true");
+  if(localStorage.getItem("dag-"+dag)){
+    document.getElementById(
+  "fullfortKnapp"
+).disabled = true;
 
-    fetch(
+document.getElementById(
+  "fullfortKnapp"
+).innerText =
+"✅ Registrert i dag";
+    document.getElementById("melding").innerText =
+    "✅ Dagen er allerede registrert.";
+
+    return;
+  }
+
+  localStorage.setItem("dag-"+dag,"true");
+
+  fetch(
       "https://script.google.com/macros/s/AKfycbzN_ktPiTSnktLe2nxQwwsWMwbmivlqjN-R0aDHjCnGH9sRlhXXjilOJGsduwa5zrWWkQ/exec",
       {
         method:"POST",
