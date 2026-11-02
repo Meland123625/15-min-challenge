@@ -356,16 +356,45 @@ function visKommentarBoks(){
 
     <p>Ingen kommentarer ennå.</p>
 
-    <textarea
-      placeholder="Hvordan gikk dagens challenge?"
-    ></textarea>
+   <textarea
+  id="kommentarTekst"
+  placeholder="Hvordan gikk dagens challenge?"
+></textarea>
 
-    <button>
-      Lagre kommentar
-    </button>
+<button onclick="lagreKommentar()">
+  Lagre kommentar
+</button>
   `;
 }
 
+function lagreKommentar(){
+
+  const kommentar =
+    document.getElementById(
+      "kommentarTekst"
+    ).value;
+
+  if(!kommentar){
+    alert("Skriv en kommentar først 😊");
+    return;
+  }
+
+  fetch(
+    "https://script.google.com/macros/s/AKfycbzN_ktPiTSnktLe2nxQwwsWMwbmivlqjN-R0aDHjCnGH9sRlhXXjilOJGsduwa5zrWWkQ/exec",
+    {
+      method:"POST",
+      body:JSON.stringify({
+        navn: bruker,
+        dato: new Date().toISOString().split("T")[0],
+        fullfort:"Ja",
+        kommentar: kommentar
+      })
+    }
+  );
+
+  alert("💬 Kommentar lagret!");
+}
+    
 function fullfort(){
 
     localStorage.setItem("dag-"+dag,"true");
