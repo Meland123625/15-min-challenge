@@ -357,12 +357,21 @@ async function hentKommentarer(){
 
   let kommentarer = "";
 
+const idag =
+  new Date().toISOString().split("T")[0];
+    
   data.slice(1).forEach(rad => {
 
     const navn = rad[0];
+    const dato = rad[1];
     const kommentar = rad[3];
 
-    if(kommentar && kommentar.trim() !== ""){
+
+    iif(
+  dato === idag &&
+  kommentar &&
+  kommentar.trim() !== ""
+){
 
       kommentarer += `
         <div style="margin-bottom:15px">
