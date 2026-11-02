@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>15 Minutes Challenge</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#f4f4f4;
+    margin:0;
+    padding:20px;
+}
+
+.card{
+    max-width:600px;
+    margin:auto;
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+h1{
+    text-align:center;
+}
+
+.date{
+    color:#666;
+    text-align:center;
+}
+
+.exercise{
+    padding:12px;
+    margin:10px 0;
+    background:#f8f8f8;
+    border-radius:8px;
+}
+
+button{
+    width:100%;
+    padding:15px;
+    background:#28a745;
+    color:white;
+    border:none;
+    border-radius:8px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#218838;
+}
+</style>
+
+</head>
+<body>
+
+<div class="card">
+    <h1>🔥 15 Minutes Challenge</h1>
+
+    <div class="date" id="dag"></div>
+
+    <h2 id="fokus"></h2>
+
+    <div id="ovelser"></div>
+
+    <button onclick="fullfort()">
+        ✅ Marker dagen som fullført
+    </button>
+
+    <p id="status"></p>
+
+</div>
+
+<script>
+
+const challenge = {
+    1:{
+        fokus:"Mage",
+        ovelser:[
+            "Sideplanke med hip lift",
+            "Super V squeeze",
+            "Sit ups"
+        ]
+    },
+    2:{
+        fokus:"Bein",
+        ovelser:[
+            "Squats",
+            "Lunges",
+            "Wall Sit"
+        ]
+    },
+    3:{
+        fokus:"Armer",
+        ovelser:[
+            "Push ups",
+            "Dips",
+            "Plank shoulder tap"
+        ]
+    }
+};
+
+let dag = new Date().getDate();
+
+document.getElementById("dag").innerText =
+    "Dagens dato: " + dag + ". november";
+
+if(challenge[dag]){
+
+    document.getElementById("fokus").innerText =
+        "Fokus: " + challenge[dag].fokus;
+
+    challenge[dag].ovelser.forEach(o => {
+
+        document.getElementById("ovelser").innerHTML +=
+            `<div class="exercise">
+            <input type="checkbox"> ${o}
+            </div>`;
+
+    });
+
+}else{
+
+    document.getElementById("fokus").innerText =
+        "Challenge ikke lagt inn ennå";
+
+}
+
+function fullfort(){
+
+    localStorage.setItem(
+        "dag-" + dag,
+        "fullført"
+    );
+
+    document.getElementById("status").innerText =
+        "🎉 Bra jobba! Dagen er markert som fullført.";
+
+}
+
+</script>
+
+</body>
+</html>
