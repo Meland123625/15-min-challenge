@@ -93,6 +93,22 @@ button:hover{
     font-size:18px;
 }
 
+#fullfortIdag{
+    background:#f7f7f7;
+    padding:20px;
+    border-radius:15px;
+    margin:20px 0;
+}
+
+#fullfortIdag h3{
+    margin-top:0;
+}
+
+#fullfortIdag div{
+    margin:8px 0;
+    font-size:18px;
+}
+
 </style>
 </head>
 
@@ -105,6 +121,7 @@ button:hover{
 <div class="date" id="dato"></div>
 <div class="date" id="brukerNavn"></div>
 <div id="leaderboard"></div>
+<div id="fullfortIdag"></div>
 
 <div class="stats" id="stats"></div>
 
@@ -264,7 +281,48 @@ async function hentLeaderboard(){
     "leaderboard"
   ).innerHTML = html;
 }
-    
+
+async function hentFullfortIdag(){
+
+  const response = await fetch(
+    "https://script.google.com/macros/s/AKfycbzN_ktPiTSnktLe2nxQwwsWMwbmivlqjN-R0aDHjCnGH9sRlhXXjilOJGsduwa5zrWWkQ/exec"
+  );
+
+  const data = await response.json();
+
+  const fullforte = [];
+
+  data.slice(1).forEach(rad => {
+
+    const navn = rad[0];
+
+    if(navn && !fullforte.includes(navn)){
+      fullforte.push(navn);
+    }
+
+  });
+
+  let html =
+    "<h3>✅ Fullført i dag</h3>";
+
+  ["Martine","Sandra","Maria"]
+    .forEach(navn=>{
+
+      const status =
+        fullforte.includes(navn)
+          ? "✅"
+          : "⬜";
+
+      html +=
+        `<div>${status} ${navn}</div>`;
+
+    });
+
+  document.getElementById(
+    "fullfortIdag"
+  ).innerHTML = html;
+}
+
 function fullfort(){
 
     localStorage.setItem("dag-"+dag,"true");
@@ -290,6 +348,7 @@ function fullfort(){
 
 oppdaterProgress();
 hentLeaderboard();
+hentFullfortIdag();
 
 </script>
 
