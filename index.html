@@ -148,6 +148,7 @@ const challenge = {
 };
 
 const dag = new Date().getDate();
+localStorage.removeItem("bruker");
 let bruker = localStorage.getItem("bruker");
 
 if(!bruker){
