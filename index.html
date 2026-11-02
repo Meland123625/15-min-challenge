@@ -360,6 +360,44 @@ async function hentFullfortIdag(){
   ).innerHTML = html;
 }
 
+async function hentStreaks(){
+
+  const response = await fetch(
+    "https://script.google.com/macros/s/AKfycbzN_ktPiTSnktLe2nxQwwsWMwbmivlqjN-R0aDHjCnGH9sRlhXXjilOJGsduwa5zrWWkQ/exec"
+  );
+
+  const data = await response.json();
+
+  const teller = {
+    Martine: 0,
+    Maria: 0,
+    Sandra: 0
+  };
+
+  data.slice(1).forEach(rad => {
+
+    const navn = rad[0];
+
+    if(
+      navn &&
+      teller[navn] !== undefined
+    ){
+      teller[navn]++;
+    }
+
+  });
+
+  document.getElementById(
+    "streaks"
+  ).innerHTML = `
+    <h3>🔥 Streaks</h3>
+
+    <div>🔥 Martine - ${teller.Martine} dager</div>
+    <div>🔥 Maria - ${teller.Maria} dager</div>
+    <div>🔥 Sandra - ${teller.Sandra} dager</div>
+  `;
+}
+    
 async function hentKommentarer(){
 
   const response = await fetch(
@@ -486,6 +524,7 @@ function fullfort(){
 
 oppdaterProgress();
 hentLeaderboard();
+hentStreaks();
 hentFullfortIdag();
 visKommentarBoks();
 
