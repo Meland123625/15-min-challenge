@@ -204,6 +204,19 @@ function fullfort(){
 
     localStorage.setItem("dag-"+dag,"true");
 
+    fetch(
+      "https://script.google.com/macros/s/AKfycbzN_ktPiTSnktLe2nxQwwsWMwbmivlqjN-R0aDHjCnGH9sRlhXXjilOJGsduwa5zrWWkQ/exec",
+      {
+        method:"POST",
+        body:JSON.stringify({
+          navn: bruker,
+          dato: new Date().toISOString().split("T")[0],
+          fullfort:"Ja",
+          kommentar:""
+        })
+      }
+    );
+
     document.getElementById("melding").innerText =
     "🎉 Bra jobba! Dagen er registrert.";
 
