@@ -85,6 +85,7 @@ button:hover{
 <h1>🔥 15 Minutes Challenge</h1>
 
 <div class="date" id="dato"></div>
+<div class="date" id="brukerNavn"></div>
 
 <div class="stats" id="stats"></div>
 
@@ -147,10 +148,26 @@ const challenge = {
 };
 
 const dag = new Date().getDate();
+let bruker = localStorage.getItem("bruker");
 
+if(!bruker){
+
+  bruker = prompt(
+    "Hvem er du?\n\nMartine\nSara\nIda"
+  );
+
+  localStorage.setItem(
+    "bruker",
+    bruker
+  );
+}
+    
 document.getElementById("dato").innerText =
 `Dagens dato: ${dag}. november`;
 
+document.getElementById("brukerNavn").innerText =
+`👤 ${bruker}`;
+    
 if(challenge[dag]){
     document.getElementById("fokus").innerText =
     `Fokus: ${challenge[dag].fokus}`;
