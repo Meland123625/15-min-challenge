@@ -31,6 +31,17 @@ h1{
     color:#666;
 }
 
+.profilbilde{
+    width:70px;
+    height:70px;
+    border-radius:50%;
+    object-fit:cover;
+    border:3px solid white;
+    box-shadow:0 2px 8px rgba(0,0,0,0.2);
+    vertical-align:middle;
+    margin-right:10px;
+}
+    
 .progress{
     margin:20px 0;
 }
@@ -237,8 +248,26 @@ if(!bruker){
 document.getElementById("dato").innerText =
 `Dagens dato: ${dag}. november`;
 
-document.getElementById("brukerNavn").innerText =
-`👤 ${bruker}`;
+let bilde = "";
+
+if(bruker === "Martine"){
+  bilde = "martine.JPG";
+}
+
+if(bruker === "Maria"){
+  bilde = "maria.JPG";
+}
+
+if(bruker === "Sandra"){
+  bilde = "sandra.JPG";
+}
+
+document.getElementById(
+  "brukerNavn"
+).innerHTML = `
+  <img src="${bilde}" class="profilbilde">
+  ${bruker}
+`;
 
 console.log("Aktiv bruker:", bruker);
     
