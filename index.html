@@ -50,6 +50,17 @@ h1{
     vertical-align:middle;
     margin:0 8px;
 }
+
+.kommentarBoble{
+    background:white;
+    padding:12px 16px;
+    border-radius:18px;
+    display:inline-block;
+    margin-top:10px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.08);
+    max-width:80%;
+    font-size:18px;
+}
     
 .progress{
     margin:20px 0;
@@ -494,9 +505,9 @@ kommentarer += `
     <img src="${bilde}"
          class="profilbildeMini">
 
-    <br><br>
-
-    ${kommentar}
+    <div class="kommentarBoble">
+      ${kommentar}
+    </div>
 
   </div>
 `;
