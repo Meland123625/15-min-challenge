@@ -347,6 +347,36 @@ async function hentFullfortIdag(){
   ).innerHTML = html;
 }
 
+async function hentKommentarer(){
+
+  const response = await fetch(
+    "https://script.google.com/macros/s/AKfycbzN_ktPiTSnktLe2nxQwwsWMwbmivlqjN-R0aDHjCnGH9sRlhXXjilOJGsduwa5zrWWkQ/exec"
+  );
+
+  const data = await response.json();
+
+  let kommentarer = "";
+
+  data.slice(1).forEach(rad => {
+
+    const navn = rad[0];
+    const kommentar = rad[3];
+
+    if(kommentar && kommentar.trim() !== ""){
+
+      kommentarer += `
+        <div style="margin-bottom:15px">
+          <strong>${navn}</strong><br>
+          ${kommentar}
+        </div>
+      `;
+    }
+
+  });
+
+  return kommentarer;
+}
+
 function visKommentarBoks(){
 
   document.getElementById(
@@ -354,7 +384,9 @@ function visKommentarBoks(){
   ).innerHTML = `
     <h3>💬 Dagens kommentarer</h3>
 
-    <p>Ingen kommentarer ennå.</p>
+    <div id="kommentarListe">
+Laster kommentarer...
+</div>
 
    <textarea
   id="kommentarTekst"
@@ -422,6 +454,14 @@ oppdaterProgress();
 hentLeaderboard();
 hentFullfortIdag();
 visKommentarBoks();
+
+hentKommentarer().then(kommentarer => {
+
+  document.getElementById(
+    "kommentarListe"
+  ).innerHTML = kommentarer;
+
+});
 
 </script>
 
