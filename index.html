@@ -2,24 +2,24 @@
 <html lang="no">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>15 Minutes Challenge</title>
 
 <style>
 body{
-    font-family: Arial, sans-serif;
-    background:#f4f4f4;
+    font-family: Arial,sans-serif;
+    background:#f3f4f6;
     margin:0;
     padding:20px;
 }
 
 .card{
-    max-width:600px;
+    max-width:700px;
     margin:auto;
     background:white;
     padding:25px;
-    border-radius:15px;
-    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    border-radius:20px;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
 }
 
 h1{
@@ -27,119 +27,173 @@ h1{
 }
 
 .date{
-    color:#666;
     text-align:center;
+    color:#666;
+}
+
+.progress{
+    margin:20px 0;
+}
+
+.progress-bar{
+    height:20px;
+    background:#ddd;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress-fill{
+    height:100%;
+    width:0%;
+    background:#22c55e;
 }
 
 .exercise{
-    padding:12px;
+    background:#f5f5f5;
+    padding:15px;
+    border-radius:10px;
     margin:10px 0;
-    background:#f8f8f8;
-    border-radius:8px;
 }
 
 button{
     width:100%;
-    padding:15px;
-    background:#28a745;
-    color:white;
     border:none;
-    border-radius:8px;
+    background:#22c55e;
+    color:white;
+    padding:15px;
+    border-radius:10px;
     font-size:16px;
     cursor:pointer;
 }
 
 button:hover{
-    background:#218838;
+    background:#16a34a;
+}
+
+.stats{
+    text-align:center;
+    font-weight:bold;
+    margin-bottom:20px;
 }
 </style>
-
 </head>
+
 <body>
 
 <div class="card">
-    <h1>🔥 15 Minutes Challenge</h1>
 
-    <div class="date" id="dag"></div>
+<h1>🔥 15 Minutes Challenge</h1>
 
-    <h2 id="fokus"></h2>
+<div class="date" id="dato"></div>
 
-    <div id="ovelser"></div>
+<div class="stats" id="stats"></div>
 
-    <button onclick="fullfort()">
-        ✅ Marker dagen som fullført
-    </button>
+<div class="progress">
+<div class="progress-bar">
+<div id="bar" class="progress-fill"></div>
+</div>
+</div>
 
-    <p id="status"></p>
+<h2 id="fokus"></h2>
+
+<div id="ovelser"></div>
+
+<button onclick="fullfort()">
+✅ Marker dagen som fullført
+</button>
+
+<p id="melding"></p>
 
 </div>
 
 <script>
 
 const challenge = {
-    1:{
-        fokus:"Mage",
-        ovelser:[
-            "Sideplanke med hip lift",
-            "Super V squeeze",
-            "Sit ups"
-        ]
-    },
-    2:{
-        fokus:"Bein",
-        ovelser:[
-            "Squats",
-            "Lunges",
-            "Wall Sit"
-        ]
-    },
-    3:{
-        fokus:"Armer",
-        ovelser:[
-            "Push ups",
-            "Dips",
-            "Plank shoulder tap"
-        ]
-    }
+
+1:{fokus:"Mage",ovelser:["Sideplanke med hip lift","Super V squeeze","Sit ups"]},
+2:{fokus:"Bein",ovelser:["Squats","Lunges","Wall Sit"]},
+3:{fokus:"Armer",ovelser:["Push ups","Dips","Plank shoulder tap"]},
+4:{fokus:"Mage",ovelser:["Cross Mountain Climbers","Russian Twist","Toe Touches"]},
+5:{fokus:"Bein",ovelser:["Reverse lunges to knee","Reverse step down","Kick backs"]},
+6:{fokus:"Mobilitet",ovelser:["Bird dog","Hip openers","Glute bridges","World greatest stretch"]},
+7:{fokus:"Flasketrening",ovelser:["Reverse flies","Upright row","RDL"]},
+
+8:{fokus:"Mage",ovelser:["Sideplanke med hip lift","Super V squeeze","Sit ups"]},
+9:{fokus:"Bein",ovelser:["Squats","Lunges","Wall Sit"]},
+10:{fokus:"Armer",ovelser:["Push ups","Dips","Plank shoulder tap"]},
+11:{fokus:"Mage",ovelser:["Cross Mountain Climbers","Russian Twist","Toe Touches"]},
+12:{fokus:"Bein",ovelser:["Reverse lunges to knee","Reverse step down","Kick backs"]},
+13:{fokus:"Mobilitet",ovelser:["Bird dog","Hip openers","Glute bridges","World greatest stretch"]},
+14:{fokus:"Flasketrening",ovelser:["Reverse flies","Upright row","RDL"]},
+
+15:{fokus:"Mage",ovelser:["Sideplanke med hip lift","Super V squeeze","Sit ups"]},
+16:{fokus:"Bein",ovelser:["Squats","Lunges","Wall Sit"]},
+17:{fokus:"Armer",ovelser:["Push ups","Dips","Plank shoulder tap"]},
+18:{fokus:"Mage",ovelser:["Cross Mountain Climbers","Russian Twist","Toe Touches"]},
+19:{fokus:"Bein",ovelser:["Reverse lunges to knee","Reverse step down","Kick backs"]},
+20:{fokus:"Mobilitet",ovelser:["Bird dog","Hip openers","Glute bridges","World greatest stretch"]},
+21:{fokus:"Flasketrening",ovelser:["Reverse flies","Upright row","RDL"]},
+
+22:{fokus:"Mage",ovelser:["Sideplanke med hip lift","Super V squeeze","Sit ups"]},
+23:{fokus:"Bein",ovelser:["Squats","Lunges","Wall Sit"]},
+24:{fokus:"Armer",ovelser:["Push ups","Dips","Plank shoulder tap"]},
+25:{fokus:"Mage",ovelser:["Cross Mountain Climbers","Russian Twist","Toe Touches"]},
+26:{fokus:"Bein",ovelser:["Reverse lunges to knee","Reverse step down","Kick backs"]},
+27:{fokus:"Mobilitet",ovelser:["Bird dog","Hip openers","Glute bridges","World greatest stretch"]},
+28:{fokus:"Flasketrening",ovelser:["Reverse flies","Upright row","RDL"]},
+
+29:{fokus:"Mage",ovelser:["Sideplanke med hip lift","Super V squeeze","Sit ups"]},
+30:{fokus:"Bein",ovelser:["Squats","Lunges","Wall Sit"]}
 };
 
-let dag = new Date().getDate();
+const dag = new Date().getDate();
 
-document.getElementById("dag").innerText =
-    "Dagens dato: " + dag + ". november";
+document.getElementById("dato").innerText =
+`Dagens dato: ${dag}. november`;
 
 if(challenge[dag]){
-
     document.getElementById("fokus").innerText =
-        "Fokus: " + challenge[dag].fokus;
+    `Fokus: ${challenge[dag].fokus}`;
 
-    challenge[dag].ovelser.forEach(o => {
-
+    challenge[dag].ovelser.forEach(o=>{
         document.getElementById("ovelser").innerHTML +=
-            `<div class="exercise">
-            <input type="checkbox"> ${o}
-            </div>`;
-
+        `<div class="exercise">☐ ${o}</div>`;
     });
+}
 
-}else{
+function hentAntallFullfort(){
+    let teller = 0;
 
-    document.getElementById("fokus").innerText =
-        "Challenge ikke lagt inn ennå";
+    for(let i=1;i<=30;i++){
+        if(localStorage.getItem("dag-"+i)){
+            teller++;
+        }
+    }
 
+    return teller;
+}
+
+function oppdaterProgress(){
+    let fullforte = hentAntallFullfort();
+
+    document.getElementById("stats").innerText =
+    `${fullforte} av 30 dager fullført`;
+
+    document.getElementById("bar").style.width =
+    `${(fullforte/30)*100}%`;
 }
 
 function fullfort(){
 
-    localStorage.setItem(
-        "dag-" + dag,
-        "fullført"
-    );
+    localStorage.setItem("dag-"+dag,"true");
 
-    document.getElementById("status").innerText =
-        "🎉 Bra jobba! Dagen er markert som fullført.";
+    document.getElementById("melding").innerText =
+    "🎉 Bra jobba! Dagen er registrert.";
 
+    oppdaterProgress();
 }
+
+oppdaterProgress();
 
 </script>
 
