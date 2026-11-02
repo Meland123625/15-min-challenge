@@ -379,10 +379,27 @@ async function hentKommentarer(){
 
 function visKommentarBoks(){
 
+  const fullfortIdag =
+    localStorage.getItem("dag-"+dag);
+
+  if(!fullfortIdag){
+
+    document.getElementById(
+      "kommentarer"
+    ).innerHTML = `
+      <h3>💬 Dagens kommentarer</h3>
+      <p>
+        Fullfør dagens challenge for å
+        legge inn kommentar 😊
+      </p>
+    `;
+
+    return;
+  }
+
   document.getElementById(
     "kommentarer"
   ).innerHTML = `
-    <h3>💬 Dagens kommentarer</h3>
 
     <div id="kommentarListe">
 Laster kommentarer...
@@ -399,6 +416,9 @@ Laster kommentarer...
   `;
 }
 
+const fullfortIdag =
+  localStorage.getItem("dag-"+dag);
+    
 function lagreKommentar(){
 
   const kommentar =
