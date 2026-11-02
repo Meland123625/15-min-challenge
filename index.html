@@ -32,14 +32,23 @@ h1{
 }
 
 .profilbilde{
-    width:70px;
-    height:70px;
+    width:90px;
+    height:90px;
     border-radius:50%;
     object-fit:cover;
     border:3px solid white;
     box-shadow:0 2px 8px rgba(0,0,0,0.2);
     vertical-align:middle;
     margin-right:10px;
+}
+
+.profilbildeMini{
+    width:35px;
+    height:35px;
+    border-radius:50%;
+    object-fit:cover;
+    vertical-align:middle;
+    margin:0 8px;
 }
     
 .progress{
@@ -334,16 +343,34 @@ async function hentLeaderboard(){
   let html =
     "<h3>🏆 Leaderboard</h3>";
 
-  ranking.forEach((person,index)=>{
+ ranking.forEach((person,index)=>{
 
-    const medalje =
-      ["🥇","🥈","🥉"][index];
+  const medalje =
+    ["🥇","🥈","🥉"][index];
 
-    html +=
-      `<div>${medalje} ${person[0]} - ${person[1]}</div>`;
+  let bilde = "";
 
-  });
+  if(person[0] === "Martine"){
+    bilde = "martine.JPG";
+  }
 
+  if(person[0] === "Maria"){
+    bilde = "maria.JPG";
+  }
+
+  if(person[0] === "Sandra"){
+    bilde = "sandra.JPG";
+  }
+
+  html += `
+    <div>
+      ${medalje}
+      <img src="${bilde}" class="profilbildeMini">
+      ${person[0]} - ${person[1]}
+    </div>
+  `;
+
+});
   document.getElementById(
     "leaderboard"
   ).innerHTML = html;
