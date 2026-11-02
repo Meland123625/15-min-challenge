@@ -469,16 +469,29 @@ async function hentStreaks(){
     }
 
   });
+document.getElementById(
+  "streaks"
+).innerHTML = `
+  <h3>🔥 Streaks</h3>
 
-  document.getElementById(
-    "streaks"
-  ).innerHTML = `
-    <h3>🔥 Streaks</h3>
+  <div>
+    <img src="martine.JPG"
+         class="profilbildeMini">
+    Martine - ${teller.Martine} dag${teller.Martine == 1 ? "" : "er"}
+  </div>
 
-    <div>🔥 Martine - ${teller.Martine} dager</div>
-    <div>🔥 Maria - ${teller.Maria} dager</div>
-    <div>🔥 Sandra - ${teller.Sandra} dager</div>
-  `;
+  <div>
+    <img src="maria.JPG"
+         class="profilbildeMini">
+    Maria - ${teller.Maria} dag${teller.Maria == 1 ? "" : "er"}
+  </div>
+
+  <div>
+    <img src="sandra.JPG"
+         class="profilbildeMini">
+    Sandra - ${teller.Sandra} dag${teller.Sandra == 1 ? "" : "er"}
+  </div>
+`;
 }
     
 async function hentKommentarer(){
