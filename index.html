@@ -354,21 +354,17 @@ async function hentKommentarer(){
   );
 
   const data = await response.json();
+let kommentarer = "";
 
-  let kommentarer = "";
+data.slice(1).forEach(rad => {
 
-const idag =
-  new Date().toISOString().split("T")[0];
-    
-  data.slice(1).forEach(rad => {
+  const navn = rad[0];
+  const kommentar = rad[3];
 
-    const navn = rad[0];
-    const dato = rad[1];
-    const kommentar = rad[3];
-
-
-  if(true){
-
+  if(
+    kommentar &&
+    kommentar.trim() !== ""
+  ){
 
       kommentarer += `
         <div style="margin-bottom:15px">
@@ -376,9 +372,10 @@ const idag =
           ${kommentar}
         </div>
       `;
-    }
 
-  });
+  }
+
+});
 
   return kommentarer;
 }
