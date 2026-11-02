@@ -61,6 +61,14 @@ h1{
     max-width:80%;
     font-size:18px;
 }
+
+@media (max-width:700px){
+
+    .topStats{
+        flex-direction:column;
+    }
+
+}
     
 .progress{
     margin:20px 0;
@@ -173,6 +181,18 @@ button:hover{
     margin-top:10px;
 }
 
+.topStats{
+    display:flex;
+    gap:10px;
+    margin:20px 0;
+}
+
+#leaderboard,
+#streaks{
+    flex:1;
+}
+
+    
 .confetti{
     position:fixed;
     width:10px;
@@ -187,6 +207,7 @@ button:hover{
         transform:translateY(110vh) rotate(720deg);
     }
 }
+
     
 </style>
 </head>
@@ -218,8 +239,14 @@ button:hover{
 
 <p id="melding"></p>
 
-<div id="leaderboard"></div>
-<div id="streaks"></div>
+<div class="topStats">
+
+  <div id="leaderboard"></div>
+
+  <div id="streaks"></div>
+
+</div>
+    
 <div id="fullfortIdag"></div>
 <div id="kommentarer"></div>
 
