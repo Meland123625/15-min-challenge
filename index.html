@@ -367,8 +367,9 @@ const idag =
     const kommentar = rad[3];
 
 
-    iif(
-  dato === idag &&
+  if(
+  dato &&
+  dato.toString().includes(idag) &&
   kommentar &&
   kommentar.trim() !== ""
 ){
