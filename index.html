@@ -454,7 +454,8 @@ async function hentFullfortIdag(){
 
     const idag =
       new Date().toISOString().split("T")[0];
-
+        console.log("IDAG:", idag);
+        console.log("DATO I ARK:", dato);
     if(
       navn &&
       fullfort === "Ja" &&
