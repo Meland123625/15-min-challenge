@@ -457,10 +457,11 @@ async function hentFullfortIdag(){
         console.log("IDAG:", idag);
         console.log("DATO I ARK:", dato);
     if(
-      navn &&
-      fullfort === "Ja" &&
-      dato === idag &&
-      !fullforte.includes(navn)
+          navn &&
+          fullfort === "Ja" &&
+          dato &&
+          dato.toString().includes(idag) &&
+          !fullforte.includes(navn)
     ){
         fullforte.push(navn);
 }
