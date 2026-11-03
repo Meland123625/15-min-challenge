@@ -452,20 +452,29 @@ async function hentFullfortIdag(){
     const dato = rad[1];
     const fullfort = rad[2];
 
-    const idag =
-      new Date().toISOString().split("T")[0];
-      console.log("IDAG:", idag);
-        console.log("DATO:", dato);
-        console.log("FULLFORT:", fullfort);
-    if(
-          navn &&
-          fullfort === "Ja" &&
-          dato &&
-          dato.toString().includes(idag) &&
-          !fullforte.includes(navn)
-    ){
-        fullforte.push(navn);
-}
+const idag =
+  new Date().toLocaleDateString("sv-SE");
+
+data.slice(1).forEach(rad => {
+
+  const navn = rad[0];
+  const dato = rad[1];
+  const fullfort = rad[2];
+
+  const datoFormatert =
+    new Date(dato)
+      .toLocaleDateString("sv-SE");
+
+  if(
+    navn &&
+    fullfort === "Ja" &&
+    datoFormatert === idag &&
+    !fullforte.includes(navn)
+  ){
+      fullforte.push(navn);
+  }
+
+});
 
   });
 
