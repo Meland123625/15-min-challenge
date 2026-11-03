@@ -205,10 +205,38 @@ button:hover{
     animation:fall 3s linear forwards;
 }
 
-@keyframes fall{
-    to{
-        transform:translateY(110vh) rotate(720deg);
+    @keyframes fall{
+
+    0%{
+        transform:
+            translate(0,0)
+            rotate(0deg);
     }
+
+    25%{
+        transform:
+            translate(-30px,25vh)
+            rotate(180deg);
+    }
+
+    50%{
+        transform:
+            translate(40px,50vh)
+            rotate(360deg);
+    }
+
+    75%{
+        transform:
+            translate(-20px,75vh)
+            rotate(540deg);
+    }
+
+    100%{
+        transform:
+            translate(30px,110vh)
+            rotate(720deg);
+    }
+
 }
 
     
@@ -711,6 +739,17 @@ function konfetti(){
 
     bit.style.left =
       Math.random()*100 + "vw";
+      bit.style.width =
+  (6 + Math.random()*10) + "px";
+
+    bit.style.height =
+      bit.style.width;
+    
+    bit.style.animationDuration =
+      (2 + Math.random()*2) + "s";
+
+    bit.style.opacity =
+      0.7 + Math.random()*0.3;
 
     bit.style.background =
       farger[
