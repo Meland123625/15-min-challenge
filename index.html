@@ -449,10 +449,20 @@ async function hentFullfortIdag(){
   data.slice(1).forEach(rad => {
 
     const navn = rad[0];
+    const dato = rad[1];
+    const fullfort = rad[2];
 
-    if(navn && !fullforte.includes(navn)){
-      fullforte.push(navn);
-    }
+    const idag =
+      new Date().toISOString().split("T")[0];
+
+    if(
+      navn &&
+      fullfort === "Ja" &&
+      dato === idag &&
+      !fullforte.includes(navn)
+    ){
+        fullforte.push(navn);
+}
 
   });
 
