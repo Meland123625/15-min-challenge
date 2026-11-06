@@ -554,26 +554,76 @@ async function hentStreaks(){
 
   const data = await response.json();
 
-  const teller = {
-    Martine: 0,
-    Maria: 0,
-    Sandra: 0
-  };
+  const datoer = {
+  Martine: [],
+  Maria: [],
+  Sandra: []
+};
 
   data.slice(1).forEach(rad => {
 
     const navn = rad[0];
     const fullfort = rad[2];
 
+    const dato = rad[1];
+
     if(
       navn &&
       fullfort === "Ja" &&
-      teller[navn] !== undefined
+      datoer[navn] !== undefined
     ){
-  teller[navn]++;
+
+      const datoFormatert =
+        new Date(dato)
+          .toLocaleDateString("sv-SE");
+
+      datoer[navn].push(datoFormatert);
 }
 
   });
+
+function beregnStreak(datoListe){
+
+  if(datoListe.length === 0){
+    return 0;
+  }
+
+  const unikeDatoer =
+    [...new Set(datoListe)]
+      .sort()
+      .reverse();
+
+  let streak = 1;
+
+  for(let i = 0; i < unikeDatoer.length - 1; i++){
+
+    const dagens =
+      new Date(unikeDatoer[i]);
+
+    const forrige =
+      new Date(unikeDatoer[i+1]);
+
+    const forskjell =
+      (dagens - forrige) /
+      (1000 * 60 * 60 * 24);
+
+    if(forskjell === 1){
+      streak++;
+    }else{
+      break;
+    }
+
+  }
+
+  return streak;
+}
+
+const teller = {
+  Martine: beregnStreak(datoer.Martine),
+  Maria: beregnStreak(datoer.Maria),
+  Sandra: beregnStreak(datoer.Sandra)
+};
+    
 document.getElementById(
   "streaks"
 ).innerHTML = `
