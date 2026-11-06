@@ -754,18 +754,37 @@ function lagreKommentar(){
     return;
   }
 
-  fetch(
-    "https://script.google.com/macros/s/AKfycbzN_ktPiTSnktLe2nxQwwsWMwbmivlqjN-R0aDHjCnGH9sRlhXXjilOJGsduwa5zrWWkQ/exec",
-    {
-      method:"POST",
-      body:JSON.stringify({
-          navn: bruker,
-          dato: new Date().toISOString().split("T")[0],
-          fullfort:"Kommentar",
-          kommentar: kommentar
-        })
-    }
-  );
+ fetch(
+  "din-api-url",
+  {
+    method:"POST",
+    body:JSON.stringify({
+      navn: bruker,
+      dato: new Date().toLocaleDateString("sv-SE"),
+      fullfort:"Kommentar",
+      kommentar: kommentar
+    })
+  }
+)
+.then(() => {
+
+  document.getElementById(
+    "kommentarTekst"
+  ).value = "";
+
+  hentLeaderboard();
+  hentStreaks();
+  hentFullfortIdag();
+
+  hentKommentarer().then(kommentarer => {
+
+    document.getElementById(
+      "kommentarListe"
+    ).innerHTML = kommentarer;
+
+  });
+
+});
 
   alert("💬 Kommentar lagret!");
 }
